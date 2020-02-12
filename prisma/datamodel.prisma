@@ -1,0 +1,25 @@
+type User {
+  id: ID! @id
+  firstName: String!
+  lastName: String!
+  email: String! @unique
+  birthday: String!
+  gender: String!
+  hobbies: String!
+  events: [Event!]!
+}
+
+type Event {
+  id: ID! @id
+  title: String!
+  description: String!
+  date: String!
+  location: String!
+  attendees: [Attendee!]!
+}
+
+type Attendee {
+  id: ID! @id
+  user: User! 
+  event: Event! 
+}

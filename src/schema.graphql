@@ -1,0 +1,50 @@
+# ALL CHANGES HERE NEED TO BE APPLIED TO THE PRISMA DATAMODEL
+
+type Query {
+  allEvents: [Event!]!
+  allUsers: [User!]!
+  allAttendees(eventID: ID!): [Attendee!]!
+  getAttendee(eventID: ID!, userID: ID!): Attendee!
+}
+
+type Mutation {
+  newUser(
+    firstName: String!
+    lastName: String!
+    email: String!
+    birthday: String!
+    gender: String!
+    hobbies: String!
+  ): User!
+
+  deleteUser(id: ID!): User!
+  newEvent(title: String!, description: String!, date: String!, location: String!): Event!
+  addAttendee(eventID: ID!, userID: ID!): Attendee!
+  deleteAttendee(eventID: ID!, userID: ID!): Attendee!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  birthday: String!
+  gender: String!
+  hobbies: String!
+  events: [Event!]!
+}
+
+type Event {
+  id: ID!
+  title: String!
+  description: String!
+  date: String!
+  location: String!
+  attendees: [Attendee!]!
+}
+
+type Attendee {
+  id: ID!
+  user: User!
+  event: Event!
+}
